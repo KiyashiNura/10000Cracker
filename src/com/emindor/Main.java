@@ -1,4 +1,4 @@
-package com.kiyashinura;
+package com.emindor;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -11,7 +11,7 @@ public class Main {
     static PrintStream out = new PrintStream(System.out);
     public static void main(String[] args) {
 	// write your code here
-        String s = in.next().replace("0x", "").replace("L","");
+        String s = in.next().replace("0x", "").replace("L","");  // Input: 0x123ABCL
         long p = Long.parseLong(s, 16);
 
         out.println("[DEBUG]: Your Long is " + p);
@@ -26,7 +26,7 @@ public class Main {
                 String c = sc.nextLine().replace("\n", "");
                 for (int i = 1; i< 10000; i++){
                     String tmp = c+Integer.toString(i);
-                    out.println("[DEBUG]: Current word is " + tmp);
+                    out.println("[DEBUG]: Is it " + tmp + "?");
                     crc32.update(tmp.getBytes(StandardCharsets.UTF_8));
                     long currentValue = crc32.getValue();
                     out.println("[DEBUG]: Current hash is " + currentValue);
@@ -35,9 +35,10 @@ public class Main {
                         flag = false;
                         break;
                     }
+                    out.println("It's not your password(");
                     crc32.reset();
                 }
-                if (flag == false)
+                if (!flag)
                     break;
             }
 
